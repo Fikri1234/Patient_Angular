@@ -1,0 +1,81 @@
+
+<form [formGroup]="form" #ngForm="ngForm" class="form-container" (ngSubmit)="submit()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Profile Information <span *ngIf="ngForm.submitted && !form.valid" class="small-font"
+          [ngClass]="{'invalid': ngForm.submitted }">* required</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <input formControlName="firstname" matInput placeholder="First name">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="full-width">
+            <input formControlName="lastname" matInput placeholder="Last name">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 top-padding">
+          <mat-form-field class="full-width">
+            <input formControlName="phone" matInput placeholder="Phone">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Select DOB</mat-label>
+            <input formControlName="dateOfBirth" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <mat-radio-group [ngClass]="{'invalid': ngForm.submitted && form.get('gender')}"
+            formControlName="gender" class="margin-left">
+            <mat-radio-button value="MALE"> Male </mat-radio-button>
+            <mat-radio-button value="FEMALE"> Female </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div formGroupName="patientAddressDTO">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-sm-6">
+              <mat-form-field class="full-width">
+                <textarea formControlName="address" matInput placeholder="Address"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input formControlName="suburb" matInput placeholder="Suburb">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-sm-6">
+              <mat-form-field class="full-width">
+                <textarea formControlName="state" matInput placeholder="State"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input formControlName="postcode" matInput placeholder="Post Code">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
